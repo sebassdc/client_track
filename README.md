@@ -14,7 +14,7 @@ Client_track
 
 ##### Example:
 
-```
+```javascript
 var express = require('express'),
   client_track = require('client_track');
   app = express();
