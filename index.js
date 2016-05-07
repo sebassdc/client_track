@@ -52,7 +52,7 @@ exports.reqlog = function (req){
   var date = Date()
 
   // subtemplate (just for add mor data in the future)
-  var str = '"date": "{0}",\n  "ip": "{1}",\n  "device": {2}'
+  var str = '"date": "{0}",\n  "ip": "{1}",\n  "device": "{2}"'
   str = format(str, date, ip, userAgent); // Using like python string.format()
   str = "{\n  " + str + "\n},"; // Final wraping to addToFile
 
