@@ -1,7 +1,7 @@
 var format = require('string-format'),
   fs = require('fs');
 
-// usrAgentPaser(string) ==> Parse the device from the req.header['user-agent']
+// usrAgentPaser(string) ==> Parse the device from the req.header['user-agent'] (special case)
 function usrAgentPaser(str){
   var usra = JSON.stringify(str);
   usra = usra.split(' ');
@@ -46,13 +46,13 @@ exports.reqlog = function (req){
   // Parsing the data
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   ip = parseIp(ip);
-  var userAgent = usrAgentPaser(req.headers["user-agent"]);
+  var userAgent = req.headers["user-agent"];
 
   // Checking server time
   var date = Date()
 
   // subtemplate (just for add mor data in the future)
-  var str = '"date": "{0}",\n  "ip": "{1}",\n  "device": "{2}"'
+  var str = '"date": "{0}",\n  "ip": "{1}",\n  "device": {2}'
   str = format(str, date, ip, userAgent); // Using like python string.format()
   str = "{\n  " + str + "\n},"; // Final wraping to addToFile
 

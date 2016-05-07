@@ -1,6 +1,6 @@
 {
   "name": "client_track",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A simple clients tracker for express servers",
   "main": "index.js",
   "scripts": {
