@@ -3,8 +3,10 @@ var format = require('string-format'),
 
 // usrAgentPaser(string) ==> Parse the device from the req.header['user-agent']
 function usrAgentPaser(str){
-  var usra = JSON.stringify(str).split(' ')[2];
-  return usra;
+  var usra = JSON.stringify(str);
+  usra = usra.split(' ');
+  usra = format("{0} {1}", usra[2], usra[3]);
+  return usra.substring(0, usra.length - 1);
 }
 
 // parseIp(string) ==> Parse the ip from the req.headers['x-forwarded-for']
@@ -21,7 +23,7 @@ function addToFile(filename, str){
     if(err){
       console.log(err);
     }else{
-      console.log(final_log);
+      console.log(str); // Just log the new client
     }
   });
 }
@@ -34,7 +36,7 @@ function existFile(filename){
     return stats.isFile();
   }
   catch (e) {
-    console.log(filename + "NOT FOUND\n Creating file"); // Loggin to user that we create a new file
+    console.log(filename + " NOT FOUND\n Creating file"); // Loggin to user that we create a new file
     return false;
   }
 }
@@ -58,5 +60,5 @@ exports.reqlog = function (req){
   if(!existFile(LOGFILE)){
     fs.writeFileSync(LOGFILE,"// "+ date, 'utf8'); // If not then create a file with de current date
   }
-  addToFile(LOGFILE, str); // Every call log a str in the log file
+  addToFile(LOGFILE, str); // Every call log a str in the logfile
 }
