@@ -5,11 +5,11 @@ Client_track
 
 1.  Install:
 
-        $ npm install string-format
+        $ npm install client_track
 
 2.  Require:
 
-        var format = require('string-format')
+        var format = require('client_track')
 
 
 ##### Example:
